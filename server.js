@@ -11,41 +11,41 @@ app.use(cors());
 
 // Используем middleware для парсинга JSON в теле запросов
 app.use(
-  bodyParser.json({
-    type(req) {
-      return true; // Применяем парсинг JSON ко всем типам запросов
-    },
-  })
+    bodyParser.json({
+        type(req) {
+            return true; // Применяем парсинг JSON ко всем типам запросов
+        },
+    })
 );
 
 // Устанавливаем заголовок 'Content-Type' для всех ответов как 'application/json'
 app.use(function (req, res, next) {
-  res.setHeader("Content-Type", "application/json");
-  next(); // Передаем управление следующему middleware
+    res.setHeader("Content-Type", "application/json");
+    next(); // Передаем управление следующему middleware
 });
 
 // Определяем маршрут для GET-запросов на /data
 app.get("/data", async (req, res) => {
-  // Отправляем JSON-ответ с данными
-  res.send(JSON.stringify({ status: "ok" }));
+    // Отправляем JSON-ответ с данными
+    res.send(JSON.stringify({ status: "ok" }));
 });
 
 // Определяем маршрут для GET-запросов на /error
 app.get("/error", async (req, res) => {
-  // Отправляем JSON-ответ с ошибкой и статусом 500
-  res.status(500).send(JSON.stringify({ status: "Internal Error" }));
+    // Отправляем JSON-ответ с ошибкой и статусом 500
+    res.status(500).send(JSON.stringify({ status: "Internal Error" }));
 });
 
 // Определяем маршрут для GET-запросов на /loading
 app.get("/loading", async (req, res) => {
-  // Ждем 5 секунд перед отправкой ответа
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(); // Разрешаем промис после 8 секунд
-    }, 8000);
-  });
-  // Отправляем JSON-ответ с данными после задержки
-  res.send(JSON.stringify({ status: "ok" }));
+    // Ждем 5 секунд перед отправкой ответа
+    await new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(); // Разрешаем промис после 8 секунд
+        }, 8000);
+    });
+    // Отправляем JSON-ответ с данными после задержки
+    res.send(JSON.stringify({ status: "ok" }));
 });
 
 // Определяем порт для прослушивания
